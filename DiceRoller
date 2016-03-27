@@ -1,0 +1,35 @@
+#work in progress
+
+from Tkinter import Tk, Label, Button
+from tkMessageBox import *
+import random
+
+class DiceRoller(object):
+    def __init__(self, master,roll=None,roll2=None):
+        self.master = master
+        master.title("DiceRoller")
+		
+        self.roll = random.randint(1,7)
+        self.roll2 = random.randint(1,7), random.randint(1,7)
+
+        self.label = Label(master, text="Roll Dice")
+        self.label.pack()
+
+        self.roll1 = Button(master, text="Roll One", command=lambda: showinfo("Roll",self.roll))
+        self.roll1.pack()
+
+        self.roll2 = Button(master, text="Roll Two Dice", command=lambda: showinfo("Roll",self.roll2))
+        self.roll2.pack()
+
+
+        self.close_button = Button(master, text="Close", command=master.quit)
+        self.close_button.pack()
+
+	
+
+	
+			
+
+root = Tk()
+diceroller = DiceRoller(root)
+root.mainloop()
