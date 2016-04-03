@@ -1,35 +1,35 @@
-#work in progress
-
-from Tkinter import Tk, Label, Button
-from tkMessageBox import *
+from Tkinter import *
 import random
 
-class DiceRoller(object):
-    def __init__(self, master,roll=None,roll2=None):
-        self.master = master
-        master.title("DiceRoller")
+class Dice:
+	def __init__(self,parent):
+		self.parent = parent
+		self.container = Frame(parent)
+		self.container.pack()
 		
-        self.roll = random.randint(1,7)
-        self.roll2 = random.randint(1,7), random.randint(1,7)
+		self.total = IntVar()
+		
+		self.roll = Button(text="Roll One Die", command = self.roll)
+		self.roll.pack()
+		
+		self.roll2 = Button(text="Roll Two Dice", command = self.roll2)
+		self.roll2.pack()
 
-        self.label = Label(master, text="Roll Dice")
-        self.label.pack()
+		
+		
+		self.number = 0
+		self.label = Label(parent, textvariable = self.total)
+		self.label.pack()
+		
+	def roll(self):
+		self.number = random.randint(1,6)
+		self.total.set(self.number)
+		
+	def roll2(self):
+		self.number = (random.randint(1,6),random.randint(1,6))
+		self.total.set(self.number)
 
-        self.roll1 = Button(master, text="Roll One", command=lambda: showinfo("Roll",self.roll))
-        self.roll1.pack()
-
-        self.roll2 = Button(master, text="Roll Two Dice", command=lambda: showinfo("Roll",self.roll2))
-        self.roll2.pack()
-
-
-        self.close_button = Button(master, text="Close", command=master.quit)
-        self.close_button.pack()
-
-	
-
-	
-			
-
+		
 root = Tk()
-diceroller = DiceRoller(root)
+dice = Dice(root)
 root.mainloop()
